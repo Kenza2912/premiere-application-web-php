@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+$totalQuantite = 0;
+if(isset($_SESSION['products'])){
+    foreach($_SESSION['products'] as $index => $product) {
+        $totalQuantite += $product['qtt'];
+    }
+
+}
+ 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,33 +21,7 @@
     <title>Ajout produit</title>
 </head>
 <body>
-    
-    <h1 class="uk-heading-line uk-text-center">Ajouter un produit</h1>
-    <form class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light" action="traitement.php" method="post">
-        <p>
-            <label>
-                Nom du produit : 
-                <input type="text" name="name">
-            </label>
-        </p>
-        <p>
-            <label>
-                Prix du produit :
-                <input type="number" step="any" name="price">
-                
-            </label>
-        </p>
-        <p>
-            <label>
-                Quantité désirée:
-                <input type="number" name="qtt" value="1"> 
-            </label>
-        </p>
-        <p>         
-            <input class="uk-button uk-button-default" type="submit" name="submit" value="Ajouter le produit">
-        </p>
-    </form>
-    <nav class="uk-navbar-container" uk-navbar>
+<nav class="uk-navbar-container" uk-navbar>
     <div class="uk-navbar-left">
 
         <ul class="uk-navbar-nav">
@@ -53,8 +40,35 @@
 
     </div>
 </nav>
- 
     
+    <h1 class="uk-heading-line uk-text-center">Ajouter un produit</h1>
+    <form class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light" action="traitement.php?action=add" method="post">
+        <p>
+            <label>
+                Nom du produit : 
+                <input type="text" name="name">
+            </label>
+        </p>
+        <p>
+            <label>
+                Prix du produit :
+                <input type="number" step="any" name="price" min="0" required>
+                
+            </label>
+        </p>
+        <p>
+            <label>
+                Quantité désirée:
+                <input type="number" name="qtt" value="1" min="1" required> 
+            </label>
+        </p>
+        <p>         
+            <input class="uk-button uk-button-default" type="submit" name="submit" value="Ajouter le produit">
+        </p>
+    </form>
+    
+ 
+    <p>Quantité totale d'articles : <?php echo $totalQuantite; ?></p>
 
 
 

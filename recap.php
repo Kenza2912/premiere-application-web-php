@@ -28,6 +28,7 @@ session_start();
                 "</thead>",
                 "<tbody>";
         $totalGeneral = 0;
+        $totalQuantite = 0;
         foreach($_SESSION['products'] as $index => $product) {
             echo "<tr>",
                         "<td>" .$index. "</td>",
@@ -37,20 +38,22 @@ session_start();
                         "<td>" .number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
                     "</tr>";
             $totalGeneral += $product['total'];
+            $totalQuantite += $product['qtt'];
         }
         echo "<tr>",
-                    "<td colspan=4> Total général : </td>",
+                    "<td colspan=3> Total général : </td>",
+                    "<td><strong>".number_format($totalQuantite)."</strong></td>",
                     "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
+                    
+                    
              "</tr>",    
              "</tbody>",
              "</table>";
 
     }
+
+
      ?>
-
-
-
-
 
 
 

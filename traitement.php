@@ -19,6 +19,7 @@ if(isset($_POST['submit'])){
         $_SESSION['products'] [] = $product;
     }
 }
+
 header("Location:index.php");
 
 // effectue une redirection grâce à la fonction header()
