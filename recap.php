@@ -7,10 +7,13 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/css/uikit.min.css" />
+    
     <title>Récapitulatif des produits</title>
 </head>
 <body>
+<a href="http://premiere-application-web-php.test/index.php">index.php</a>
     
     <?php if(!isset($_SESSION['products']) || empty($_SESSION['products'])) {
         echo "<p> Aucun produit en session... </p>";
@@ -30,20 +33,21 @@ session_start();
         $totalGeneral = 0;
         $totalQuantite = 0;
         foreach($_SESSION['products'] as $index => $product) {
-         var_dump($_SESSION);
+         
            
             echo "<tr>",
                         "<td>" .$index. "</td>",
                         
                         "<td>" .$product['name']. "</td>",
                         "<td>" .number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
-                        "<td>" .$product['qtt']. "<a href='traitement.php?action=up-qtt&id=$index'>+</a></td>",
+                        "<td><a href='traitement.php?action=down-qtt&id=$index'>-</a>" .$product['qtt']. "<a href='traitement.php?action=up-qtt&id=$index'>+</a></td>",
                         "<td>" .number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
                         
-                        "<td><a href='traitement.php?action=delete&id=$index'>supprimer</a></td>",
+                        "<td><a href='traitement.php?action=delete&id=$index'class='uk-icon-link' uk-icon='trash'></a></td>",
 
                     "</tr>";
             $totalGeneral += $product['total'];
+
             $totalQuantite += $product['qtt'];
         }
         echo "<tr>",
@@ -65,7 +69,7 @@ session_start();
 
 
 
-    <a href="http://premiere-application-web-php.test/index.php">index.php</a>
+    
 
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>

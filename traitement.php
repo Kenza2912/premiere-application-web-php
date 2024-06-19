@@ -22,10 +22,14 @@ if(isset($_GET['action'])){
             
                     $_SESSION['products'][] = $product;
                     $_SESSION['message'] = "Produit enregistré avec succès !";
+                    $_SESSION['message_time'] = time();
+
                 }
                 else $_SESSION['message'] = "Les données saisies sont incorrectes !";
+                $_SESSION['message_time'] = time();
             }
             else $_SESSION['message'] = "Vous devez soumettre le formulaire !";
+            $_SESSION['message_time'] = time();
 
             break;
 
@@ -33,6 +37,7 @@ if(isset($_GET['action'])){
             if(isset($_SESSION['products'])){
                 unset($_SESSION['products']);
                 $_SESSION['message'] = "Votre panier est vide!";
+                $_SESSION['message_time'] = time();
             }
             break;
         case "delete":
@@ -43,7 +48,8 @@ if(isset($_GET['action'])){
             }
             if(isset($_SESSION['products'])){             
                 unset($_SESSION['products'][$_GET['id']]);
-
+                $_SESSION['message'] = "Produit supprimé avec succès!";
+                $_SESSION['message_time'] = time();
             }
             break;
         case "up-qtt":
@@ -55,13 +61,28 @@ if(isset($_GET['action'])){
                 $_SESSION['products'][$_GET['id']]['total'] = $_SESSION['products'][$_GET['id']]['price'] * $_SESSION['products'][$_GET['id']]['qtt'];
                 header("Location:recap.php");
                 exit();
-                
-                
+                             
                 }
                 break;
-                
+        case "down-qtt":
+            if(isset($_GET['id'])){
+                $id = ($_GET['id']);
+            }
+            if(isset($_SESSION['products'][$_GET['id']]['qtt'])) {
+                if($_SESSION['products'][$_GET['id']]['qtt'] > 1){
+                    $_SESSION['products'][$_GET['id']]['qtt']--;
+                    $_SESSION['products'][$_GET['id']]['total'] = $_SESSION['products'][$_GET['id']]['price'] * $_SESSION['products'][$_GET['id']]['qtt'];
+                    header("Location:recap.php");
+                    exit();
+                }else
+                    unset($_SESSION['products'][$_GET['id']]);
+                    header("Location:recap.php");
+                    exit();              
+            }
+                break;   
             }
             
+        
             
         }
         header("Location:index.php");

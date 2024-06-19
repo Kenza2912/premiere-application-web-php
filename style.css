@@ -8,3 +8,15 @@
     max-width: 600px;
 }
     
+
+.hidden{
+    visibility: hidden;
+}
+div .message{
+    
+    visibility: visible;
+}
+.message{
+    background-color: aqua;
+    font-size: 2em;
+}

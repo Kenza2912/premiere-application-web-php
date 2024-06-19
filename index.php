@@ -22,7 +22,7 @@ if(isset($_GET['action'])){
 
 }
 
- 
+ $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +30,9 @@ if(isset($_GET['action'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/css/uikit.min.css" />
+    
     <title>Ajout produit</title>
 </head>
 <body>
@@ -83,11 +84,19 @@ if(isset($_GET['action'])){
     
  
     <p>Quantité totale d'articles : <?php echo $totalQuantite; ?></p>
+<?php if(!empty($message)) {?>
+    <div class="message" id="message" >  <?php echo $message; }?></div>
 
-    <p><?php echo $_SESSION['message']; ?></p>
 
-
-
+<script>
+    setTimeout(function() {
+       const message =document.getElementById("message");
+       
+       if(message){
+        message.classList.add("hidden");
+       } 
+    }, 4000);
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.5/dist/js/uikit-icons.min.js"></script>
