@@ -3,24 +3,70 @@
 session_start();
 //Vérifier l'existence d'une requête POST
 //La condition sera alors vraie seulement si la requête POST transmet bien une clé "submit" au serveur.
+if(isset($_GET['action'])){
+    switch($_GET['action']){
 
-if(isset($_POST['submit'])){
-    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
-    $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-    $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
-    if($name && $price &&$qtt){
-        $product =[
-            "name" =>$name,
-            "price" =>$price, 
-            "qtt" =>$qtt, 
-            "total" =>$price * $qtt
-        ];
+        case "addProduct":
 
-        $_SESSION['products'] [] = $product;
-    }
-}
+            if(isset($_POST['submit'])){
+                $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_SPECIAL_CHARS);
+                $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
+                if($name && $price &&$qtt){
+                    $product =[
+                        "name" =>$name,
+                        "price" =>$price, 
+                        "qtt" =>$qtt, 
+                        "total" =>$price * $qtt
+                    ];
+            
+                    $_SESSION['products'][] = $product;
+                    $_SESSION['message'] = "Produit enregistré avec succès !";
+                }
+                else $_SESSION['message'] = "Les données saisies sont incorrectes !";
+            }
+            else $_SESSION['message'] = "Vous devez soumettre le formulaire !";
 
-header("Location:index.php");
+            break;
+
+        case "deleteAll":
+            if(isset($_SESSION['products'])){
+                unset($_SESSION['products']);
+                $_SESSION['message'] = "Votre panier est vide!";
+            }
+            break;
+        case "delete":
+    
+            if(isset($_GET['id'])){
+                $id = ($_GET['id']);
+                
+            }
+            if(isset($_SESSION['products'])){             
+                unset($_SESSION['products'][$_GET['id']]);
+
+            }
+            break;
+        case "up-qtt":
+            if(isset($_GET['id'])){
+                $id = ($_GET['id']);
+            }
+            if(isset($_SESSION['products'][$_GET['id']]['qtt'])){
+                $_SESSION['products'][$_GET['id']]['qtt']++;
+                $_SESSION['products'][$_GET['id']]['total'] = $_SESSION['products'][$_GET['id']]['price'] * $_SESSION['products'][$_GET['id']]['qtt'];
+                header("Location:recap.php");
+                exit();
+                
+                
+                }
+                break;
+                
+            }
+            
+            
+        }
+        header("Location:index.php");
+
+
 
 // effectue une redirection grâce à la fonction header()
 // La fonction PHP filter_input() permet d'effectuer une validation ou un nettoyage de chaque donnée transmise par le formulaire en employant divers filtres

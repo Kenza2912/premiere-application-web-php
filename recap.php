@@ -11,7 +11,7 @@ session_start();
     <title>Récapitulatif des produits</title>
 </head>
 <body>
-    <?php var_dump($_SESSION); ?>
+    
     <?php if(!isset($_SESSION['products']) || empty($_SESSION['products'])) {
         echo "<p> Aucun produit en session... </p>";
 
@@ -30,12 +30,18 @@ session_start();
         $totalGeneral = 0;
         $totalQuantite = 0;
         foreach($_SESSION['products'] as $index => $product) {
+         var_dump($_SESSION);
+           
             echo "<tr>",
                         "<td>" .$index. "</td>",
+                        
                         "<td>" .$product['name']. "</td>",
                         "<td>" .number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
-                        "<td>" .$product['qtt']. "</td>",
+                        "<td>" .$product['qtt']. "<a href='traitement.php?action=up-qtt&id=$index'>+</a></td>",
                         "<td>" .number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
+                        
+                        "<td><a href='traitement.php?action=delete&id=$index'>supprimer</a></td>",
+
                     "</tr>";
             $totalGeneral += $product['total'];
             $totalQuantite += $product['qtt'];
@@ -51,10 +57,11 @@ session_start();
              "</table>";
 
     }
-
-
+   
+  
      ?>
 
+  <a href="traitement.php?action=deleteAll">supprimer</a><br>
 
 
 

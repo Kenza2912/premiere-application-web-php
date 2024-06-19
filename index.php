@@ -8,6 +8,20 @@ if(isset($_SESSION['products'])){
     }
 
 }
+if(isset($_GET['action'])){
+    if(isset($_POST['submit'])){
+        if($name && $price &&$qtt){
+            $_SESSION['message'] = "Produit enregistré avec succès !";
+            unset($GLOBALS['message']);
+        }
+        else $_SESSION['message'] = "Les données saisies sont incorrectes !";
+        unset($GLOBALS['message']);
+
+    }
+    else $_SESSION['message'] = "Vous devez soumettre le formulaire !";
+
+}
+
  
 ?>
 
@@ -42,7 +56,7 @@ if(isset($_SESSION['products'])){
 </nav>
     
     <h1 class="uk-heading-line uk-text-center">Ajouter un produit</h1>
-    <form class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light" action="traitement.php?action=add" method="post">
+    <form class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light" action="traitement.php?action=addProduct" method="post">
         <p>
             <label>
                 Nom du produit : 
@@ -69,6 +83,8 @@ if(isset($_SESSION['products'])){
     
  
     <p>Quantité totale d'articles : <?php echo $totalQuantite; ?></p>
+
+    <p><?php echo $_SESSION['message']; ?></p>
 
 
 
