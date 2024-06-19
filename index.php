@@ -36,25 +36,30 @@ if(isset($_GET['action'])){
     <title>Ajout produit</title>
 </head>
 <body>
-<nav class="uk-navbar-container" uk-navbar>
-    <div class="uk-navbar-left">
+    <nav class="navbar">
+        <div class="navbar-centre">
+            <div>
+                <ul class="ul-navbar">
+                    <li><a href="#">FEMME</a></li>
+                    <li><a href="#">HOMME</a></li>
+                    <li><a href="#">ENFANTS</a></li>
+                    <li><a href="#">HOME</a></li>
+                    
+                </ul>
+            </div>
+            <div>
+                <ul class="navbar-right">
+                    <li><a href="http://premiere-application-web-php.test/recap.php">PANIER</a></li>
+                </ul>
+            </div>
+        </div>
+       
+      
+    </nav>
 
-        <ul class="uk-navbar-nav">
-           
-            <li>
-                <a href="#">Panier</a>
-                <div class="uk-navbar-dropdown">
-                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li class="uk-active"><a href="http://premiere-application-web-php.test/recap.php">Recapitulatif</a></li>
-                        
-                    </ul>
-                </div>
-            </li>
-            
-        </ul>
+       
 
-    </div>
-</nav>
+
     
     <h1 class="uk-heading-line uk-text-center">Ajouter un produit</h1>
     <form class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light" action="traitement.php?action=addProduct" method="post">
