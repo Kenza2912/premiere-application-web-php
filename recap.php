@@ -36,12 +36,12 @@ session_start();
     </nav>
 
 
-    
+    <div class="tableau-recap">
     <?php if(!isset($_SESSION['products']) || empty($_SESSION['products'])) {
         echo "<p> Aucun produit en session... </p>";
 
     }else{
-        echo "<table >",
+        echo "<table class='uk-table uk-table-hover uk-table-divider' id='tableau'>",
                 "<thead>",
                     "<tr>",
                         "<th>#</th>",
@@ -87,7 +87,9 @@ session_start();
   
      ?>
 
-  <a href="traitement.php?action=deleteAll">supprimer</a><br>
+    </div>
+    
+  <a href="traitement.php?action=deleteAll">Vider le panier</a><br>
 
   <a href="http://premiere-application-web-php.test/index.php">Poursuivre vos achats</a>
 
