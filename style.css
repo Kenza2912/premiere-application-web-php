@@ -1,14 +1,10 @@
-.uk-card {
-    width: 600px;
-    text-align: center;
-   
-}
 
-.uk-heading-line{
-    max-width: 600px;
-}
+
+
+
+
     
-
+/* ********************************css+ js pour le message************** */
 .hidden{
     visibility: hidden;
 }
@@ -24,21 +20,21 @@ div .message{
 .navbar{
     width: 100%;
     height: 100px;
-    background-color: rgba(147, 66, 223, 0.726);
+    
+    background-color: rgba(0, 0, 0, 0.747);
 }
-
 .navbar-centre{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    padding-top: 30px;
+    padding-top: 35px;
 }
 .ul-navbar {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 40px;
     
    
 
@@ -46,6 +42,7 @@ div .message{
 .navbar-right,
 .ul-navbar li{
     list-style-type: none;
+    font-size: 1.5em;
     
 }
 .navbar-right li a,
@@ -54,5 +51,65 @@ div .message{
     color: white;
 }
 
+.fa-solid{
+    color: white;
+}
+
+/* **********************produit***************************** */
+
+.produit{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+.card{
+    width: 600px;
+    height: 400px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+
+#image{
+    height: 80vh;
+}
+
+.card h1{
+    font-size: 3em;
+}
+
+label{
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, 0.836);
+}
+
+
+#submit{
+    margin-top: 40px;
+}
+
+
+/* **********************article*************** */
+.article{
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+
+}
+.total-qqt{
+    font-size: 1.5em;
+   
+}
+#panier{
+    color: black;
+    font-size: 2em;
+}
+
+/* *********************feuille recapitulatif************************************* */
 
 
