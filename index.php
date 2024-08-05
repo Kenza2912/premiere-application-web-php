@@ -86,16 +86,19 @@ if(isset($_GET['action'])){
                     <input id="submit" class="uk-button uk-button-secondary uk-width-1-1" type="submit" name="submit" value="Ajouter le produit">
                 </p>
             </form>
+
+            
         </div>
+        <div class="article">
+        <i class="fa-solid fa-cart-shopping" id="panier"></i>
+        <p class="total-qqt">Quantité totale d'articles : <?php echo $totalQuantite; ?></p>
+     </div> 
        
     </main>
    
     </div>
 
-     <div class="article">
-        <i class="fa-solid fa-cart-shopping" id="panier"></i>
-        <p class="total-qqt">Quantité totale d'articles : <?php echo $totalQuantite; ?></p>
-     </div>  
+      
     
     
     <?php if(!empty($message)) {?>

@@ -14,73 +14,77 @@ session_start();
     <title>Récapitulatif des produits</title>
 </head>
 <body>
-<nav class="navbar">
-        <div class="navbar-centre">
-            <div>
-                <ul class="ul-navbar">
-                    <li><a href="#">FEMME</a></li>
-                    <li><a href="#">HOMME</a></li>
-                    <li><a href="#">ENFANTS</a></li>
-                    <li><a href="#">HOME</a></li>
-                    
-                </ul>
-            </div>
-            <div>
-                <ul class="navbar-right">
-                    <li><a href="http://premiere-application-web-php.test/recap.php">PANIER</a><i class="fa-solid fa-cart-shopping"></i></li>
-                </ul>
-            </div>
-        </div>
-       
-      
+    <!--****************************************NAVBAR************************************************ -->
+
+    <nav class="navbar">
+            <div class="navbar-centre">
+                <div>
+                    <ul class="ul-navbar">
+                        <li><a href="#">FEMME</a></li>
+                        <li><a href="#">HOMME</a></li>
+                        <li><a href="#">ENFANTS</a></li>
+                        <li><a href="#">HOME</a></li>
+                        
+                    </ul>
+                </div>
+            
+                <div>
+                    <ul class="navbar-right">
+                        <li><a href="http://premiere-application-web-php.test/recap.php">PANIER</a><i class="fa-solid fa-cart-shopping"></i></li>
+                    </ul>
+                </div>
+            </div>  
     </nav>
 
+    <div class="recap" >
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" id="img"  data-src="https://images.unsplash.com/photo-1495321308589-43affb814eee?fit=crop&w=650&h=433&q=80" uk-img="loading: eager">
 
-    <div class="tableau-recap">
-    <?php if(!isset($_SESSION['products']) || empty($_SESSION['products'])) {
-        echo "<p> Aucun produit en session... </p>";
+        </div>
+        <div class="tableau-recap">
+            <?php if(!isset($_SESSION['products']) || empty($_SESSION['products'])) {
+                     echo "<p> Aucun produit en session... </p>";
 
-    }else{
-        echo "<table class='uk-table uk-table-hover uk-table-divider' id='tableau'>",
-                "<thead>",
-                    "<tr>",
-                        "<th>#</th>",
-                        "<th>Nom</th>",
-                        "<th>Prix</th>",
-                        "<th>Quantité</th>",
-                        "<th>Total</th>",
-                    "</tr>",
-                "</thead>",
-                "<tbody>";
-        $totalGeneral = 0;
-        $totalQuantite = 0;
-        foreach($_SESSION['products'] as $index => $product) {
+                }else{
+                    echo "<table class='uk-table uk-table-responsive uk-table-divider' id='tableau'>",
+                        "<thead>",
+                            "<tr>",
+                                "<th>#</th>",
+                                "<th>Nom</th>",
+                                "<th>Prix</th>",
+                                "<th>Quantité</th>",
+                                "<th>Total</th>",
+                            "</tr>",
+                        "</thead>",
+                        "<tbody>";
+                $totalGeneral = 0;
+                $totalQuantite = 0;
+                foreach($_SESSION['products'] as $index => $product) {
          
            
-            echo "<tr>",
-                        "<td>" .$index. "</td>",
-                        
-                        "<td>" .$product['name']. "</td>",
-                        "<td>" .number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
-                        "<td><a href='traitement.php?action=down-qtt&id=$index'class='quantite'>-</a>" .$product['qtt']. "<a href='traitement.php?action=up-qtt&id=$index' class='quantite'>+</a></td>",
-                        "<td>" .number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
-                        
-                        "<td><a href='traitement.php?action=delete&id=$index'class='uk-icon-link' uk-icon='trash'></a></td>",
+                        echo "<tr>",
+                                    "<td>" .$index. "</td>",
+                                    
+                                    "<td>" .$product['name']. "</td>",
+                                    "<td>" .number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
+                                    "<td id='operateur'><a class='moin' href='traitement.php?action=down-qtt&id=$index'class='quantite'>-</a>" .$product['qtt']. "<a class='plus' href='traitement.php?action=up-qtt&id=$index' class='quantite'>+</a></td>",
+                                    "<td>" .number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€ </td>",
+                                    
+                                    "<td><a href='traitement.php?action=delete&id=$index'class='uk-icon-link' uk-icon='trash'></a></td>",
 
-                    "</tr>";
-            $totalGeneral += $product['total'];
+                                "</tr>";
+                        $totalGeneral += $product['total'];
 
-            $totalQuantite += $product['qtt'];
-        }
-        echo "<tr>",
-                    "<td colspan=3> Total général : </td>",
-                    "<td><strong>".number_format($totalQuantite)."</strong></td>",
-                    "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
-                    
-                    
-             "</tr>",    
-             "</tbody>",
-             "</table>";
+                        $totalQuantite += $product['qtt'];
+                    }
+                        echo "<tr>",
+                                    "<td colspan=3><strong>  Total général :</strong> </td>",
+                                    "<td><strong>".number_format($totalQuantite)."</strong></td>",
+                                    "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;")."&nbsp;€</strong></td>",
+                                        
+                                
+                            "</tr>",    
+                        "</tbody>",
+                     "</table>";
 
     }
    
@@ -88,10 +92,17 @@ session_start();
      ?>
 
     </div>
-    
-  <a href="traitement.php?action=deleteAll">Vider le panier</a><br>
+    <div id="lien">
+        <div class="lien" >
+            <a href="traitement.php?action=deleteAll">Vider le panier</a><br>
+        
+        
+            <a href="http://premiere-application-web-php.test/index.php">Poursuivre vos achats</a>
+   
+        </div>
+  
 
-  <a href="http://premiere-application-web-php.test/index.php">Poursuivre vos achats</a>
+  </div>
 
     
 
